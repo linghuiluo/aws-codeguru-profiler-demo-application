@@ -51,6 +51,7 @@ class ImageProcessor {
                 String imageName = getNameFromKey(imageKey);
                 Main.logger().debug("Image name: " + imageName);
                 File outputFile = File.createTempFile(Instant.now().toString() + imageName, null);
+                outputFile = null; // I added this to test
                 IOUtils.copy(Main.s3Client().getObject(Main.bucketName, imageKey).getObjectContent(), new FileOutputStream(outputFile, false));
 
                 bwip.monochromeAndUpload(outputFile, imageName);
